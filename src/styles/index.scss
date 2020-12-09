@@ -11,3 +11,39 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+main{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+main > div{ 
+    padding: 5px;
+    border-radius: 8px;
+    max-width: 80px;
+}
+main > div:nth-child(1){
+    background-color: black;
+    border-radius: 0;
+    height: 130px;
+}
+main > div:nth-child(2){
+    background-color: black;
+}
+main > div > div{ 
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 5px;
+}
+.bg-red{
+    background-color: red;
+}
+.bg-yellow{
+    background-color: yellow;
+}
+.bg-green{
+    background-color: green;
+}
+.light-on{
+    box-shadow:-0px 0px 50px 30px rgb(250, 248, 159) ;
+}
