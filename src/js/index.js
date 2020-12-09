@@ -9,7 +9,7 @@ import "bootstrap";
 import "../styles/index.scss";
 
 //import your own components
-import TrafficLight from "./component/trafficLight.js";
+import TicTacToe from "./component/trafficLight.js";
 
 //render your react application
-ReactDOM.render(<TrafficLight />, document.querySelector("#app"));
+ReactDOM.render(<TicTacToe />, document.querySelector("#app"));
