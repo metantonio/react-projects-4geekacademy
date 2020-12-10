@@ -19,21 +19,21 @@ export function Home() {
 
 	const [board, setBoard] = useState([
 		//por ahora se podría cambiar manualmente los valores para comprobar
-		["x", "o", null],
-		["x", "o", "x"],
-		["o", null, "o"]
+		["x", "o", "o"],
+		["o", "x", "x"],
+		["o", "x", "x"]
 	]);
 
 	const evaluarPartida = boardHere => {
 		let winner = "";
-		//a continuación se proponen las coordenadas ganaradoras en la matriz 3x3
+		//a continuación se proponen las coordenadas ganadoras en la matriz 3x3
 		/*const lines = [
 			[00, 01, 02], //esta serían las coordenadas de la fila 1 (están en número, tal vez me convenga texto ya que podría dar error el octal 00)
-			[10, 11, 12],
-			[20, 21, 22],
+			[10, 11, 12], //fila 2
+			[20, 21, 22], //fila 3
 			[00, 10, 20], //estas serían las coordenadas de la columna 1
-			[01, 11, 21],
-			[02, 12, 22],
+			[01, 11, 21], //col 2
+			[02, 12, 22], //col 3
 			[00, 11, 22], //esta sería una diagonal
 			[02, 11, 20] //esta sería la otra diagonal
 		];*/
@@ -44,7 +44,7 @@ export function Home() {
 
 		//Aquí se empezará a recorrer las filas de la matriz para evaluar filas iguales
 
-		/*boardHere.map((row, indexRow) =>{ //esta forma de tratar de integrar el board es incorrecta
+		/*boardHere.map((row, indexRow) =>{ //esta forma de tratar de integrar el board es incorrecta y row es un número no un arreglo
 			if (row[0] && row[0] == row[1] && row[1] == row[2]) {
 				winner = row[0];
 				//break;
@@ -52,14 +52,50 @@ export function Home() {
 		}*/
 
 		//como no funcionó la función map, se intentará con loop for
+		let columns = [[], [], []]; //se sabe que esta es la estructura que las coordenadas ganadoras a buscar
 		//nota: boardHere es una variable interna declarada más arriba para meter el Estado board
 		for (let row of boardHere) {
 			if (row[0] && row[0] == row[1] && row[1] == row[2]) {
 				winner = row[0];
-				alert("victoria por filas iguales");
+				alert("victoria por filas iguales, símbolo ganador: " + winner);
 				break;
 			}
+			//se intenta tener ahora la misma estructura de matriz que las coordenadas
+			columns[0].push(row[0]);
+			columns[1].push(row[1]);
+			columns[2].push(row[2]);
 		}
+
+		//ahora con la estructura de coordenadas ganadoras creada, se puede evaluar si hay
+		//una columna ganadora al tener la misma pinta, en caso de no haber ganador por fila.
+		if (winner == "") {
+			for (let col of columns) {
+				if (col[0] && col[0] == col[1] && col[1] == col[2]) {
+					winner = col[0];
+					alert(
+						"victoria por columnas iguales, símbolo ganador: " +
+							winner
+					);
+					break;
+				}
+			}
+
+			//ahora se evalúan las diagonales
+			if (winner == "") {
+				if (
+					(board[1][1] &&
+						board[0][0] == board[1][1] &&
+						board[1][1] == board[2][2]) ||
+					(board[1][1] &&
+						board[2][0] == board[1][1] &&
+						board[1][1] == board[0][2])
+				) {
+					winner = board[1][1];
+					alert("victoria por diagonal, símbolo ganador: " + winner);
+				}
+			}
+		}
+		return winner; //pedimos el Estado de regreso para luego pasarlo por setStatusPlay
 	};
 
 	return (
