@@ -83,14 +83,14 @@ export function Home() {
 			//ahora se evalúan las diagonales
 			if (winner == "") {
 				if (
-					(board[1][1] &&
-						board[0][0] == board[1][1] &&
-						board[1][1] == board[2][2]) ||
-					(board[1][1] &&
-						board[2][0] == board[1][1] &&
-						board[1][1] == board[0][2])
+					(boardHere[1][1] &&
+						boardHere[0][0] == boardHere[1][1] &&
+						boardHere[1][1] == boardHere[2][2]) ||
+					(boardHere[1][1] &&
+						boardHere[2][0] == boardHere[1][1] &&
+						boardHere[1][1] == boardHere[0][2])
 				) {
-					winner = board[1][1];
+					winner = boardHere[1][1];
 					alert("victoria por diagonal, símbolo ganador: " + winner);
 				}
 			}
