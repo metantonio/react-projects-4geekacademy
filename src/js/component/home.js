@@ -52,7 +52,7 @@ export function Home() {
 		}*/
 
 		//como no funcionó la función map, se intentará con loop for
-		let columns = [[], [], []]; //se sabe que esta es la estructura que las coordenadas ganadoras a buscar
+		let columns = [[], [], []]; //se sabe que esta es la estructura de las coordenadas ganadoras a buscar
 		//nota: boardHere es una variable interna declarada más arriba para meter el Estado board
 		for (let row of boardHere) {
 			if (row[0] && row[0] == row[1] && row[1] == row[2]) {
