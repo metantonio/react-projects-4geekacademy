@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //Estados
 player =[{
@@ -20,11 +20,52 @@ status = {
 setStatus("playing")
 
 //definir el estado del tablero tal que:
-board = [
+/*board = [
     ["o",null,"x"],
     ["x","o,"null],
     [null,"x","o"]
-];
+];*/
+const[board, setBoard] = useState(
+    [
+        ["o",null,"x"],
+        ["x","o,"null],
+        [null,"x","o"]
+    ]
+)
+
+<div className="row justify-content-center">
+    <div className="board d-flex flex-wrap">
+        {board.map((row, indexRow)=>
+            {
+                return 
+                (
+                <React.Fragment key={indexRow}>
+                {row.map((column,indexColumn)=>{
+                    return (
+                        <div key={`${indexRow}-${indexColoumn}`} className="cell d-flex justify-content-center align-items-center">
+                           <span className="d-flex">
+                               {(cell=="x")? "❌":
+                                    (cell=="o")? "⭕":""}
+                           </span>
+                            
+                        </div>
+                    )
+                })}
+                )
+                </React.Fragment>
+                )
+            })}
+        <div className="cell" />
+        <div className="cell" />
+        <div className="cell" />
+        <div className="cell" />
+        <div className="cell" />
+        <div className="cell" />
+        <div className="cell" />
+        <div className="cell" />
+        <div className="cell" /> 
+    </div>
+</div>
 
 //define el estado sobre a quién le toca el turno de juego
 turn = // "x", "o"

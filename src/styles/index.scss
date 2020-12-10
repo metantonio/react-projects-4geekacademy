@@ -1,7 +1,6 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
 /* 
-
     You can write your own styles here...
     
     
@@ -9,5 +8,23 @@
     other sylesheets into your bunde as well, e.j:
     
     import 'relative/path/to/stylesheet.scss';
-
 */
+
+#app {
+    height: 100vh;
+    background-color: gray;
+}
+
+.board{
+    width: 30rem;
+}
+
+.cell{
+    width: 10rem;
+    height: 10rem;
+    border: solid 1px lightgray;
+}
+
+.cell span{
+    font-size: 5rem;
+}
