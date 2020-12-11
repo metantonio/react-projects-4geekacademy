@@ -12,19 +12,31 @@
 
 #app {
     height: 100vh;
+    width: 100vw;
     background-color: gray;
+    color: lightgray;
 }
 
-.board{
-    width: 30rem;
+.song {
+    &-list{
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+    }
+    & .song{
+        border: white 1px solid;
+        padding: 0.5rem 1rem;
+        &-number{
+            color: #555;
+            margin-right: 5px;
+        }
+    }
 }
 
-.cell{
-    width: 10rem;
-    height: 10rem;
-    border: solid 1px lightgray;
+.control {
+    background-color: #111;
 }
-
-.cell span{
-    font-size: 5rem;
+.selected {
+    background-color: transparentize($color: #d5d5d5, $amount: 0.6);
 }
