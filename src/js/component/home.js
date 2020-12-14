@@ -106,6 +106,20 @@ export function Home() {
 
 	const [turn, setTurn] = useState(null);
 
+	useEffect(() => {
+		if (turn == null) {
+			setTurn("x");
+		} else {
+			if (turn == "x") {
+				setTurn("o");
+			} else {
+				if (turn == "o") {
+					setTurn("x");
+				}
+			}
+		}
+	});
+
 	//se hace esta función para saber en qué celda fue hecho el click
 	const TurnGame = (indexRow, indexCol) => {
 		let newboard = board.map((row, rowIndex) => {
@@ -117,18 +131,6 @@ export function Home() {
 		});
 		setBoard(newboard);
 	};
-
-	useEffect(() => {
-		if (turn == null) {
-			setTurn("x");
-		} else {
-			if (turn == "x") {
-				setTurn("o");
-			} else {
-				setTurn("x");
-			}
-		}
-	});
 
 	return (
 		<div className="container-fluid">
