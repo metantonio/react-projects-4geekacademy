@@ -78,8 +78,10 @@ const Home = () => {
 										}
 									}
 								);
-								// guardarLista(mostrarLista);
-								//guardarTarea((e.target.value = ""));
+								if (response.ok) {
+									guardarLista(mostrarLista);
+									guardarTarea((e.target.value = ""));
+								}
 							}
 						}}
 						onChange={e => {
