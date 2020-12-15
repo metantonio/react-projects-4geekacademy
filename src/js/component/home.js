@@ -117,7 +117,7 @@ export function Home() {
 		}
 	});
 
-	//se hace esta función para saber en qué celda fue hecho el click
+	//se hace esta función para saber en qué celda fue hecho el click y colocar pinta en la celda
 	const TurnGame = (indexRow, indexCol) => {
 		let newboard = board.map((row, rowIndex) => {
 			return row.map((col, colIndex) => {
@@ -127,7 +127,9 @@ export function Home() {
 			});
 		});
 		setBoard(newboard);
-		console.log("ejecutado cambiar turno");
+		//evaluarPartida(newboard);
+		//console.log("ejecutado cambiar turno");
+		return newboard;
 	};
 
 	const newGame = boardOfNewGame => {
