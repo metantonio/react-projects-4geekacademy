@@ -152,7 +152,9 @@ export function Home() {
 			<div className="text-center row">
 				<div className="container col-10 text-white">
 					<h1>Tic Tac Toe in React</h1>
-					<h3 className="sub-text">Pick a Weapon</h3>
+					<h3 className="sub-text">
+						{statusPlay.status == "init" ? "Pick a Weapon" : ""}
+					</h3>
 				</div>
 			</div>
 			<div className="row d-flex justify-content-center">
