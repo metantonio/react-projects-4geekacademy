@@ -99,6 +99,23 @@ export function Home() {
 					document.querySelector(".sub-text").innerHTML =
 						"victoria por diagonal, símbolo ganador: " + winner;
 					newGame(board);
+					//break;
+				}
+			}
+
+			if (winner == "") {
+				let count = 0;
+				for (let i = 0; i < 3; i++) {
+					for (let j = 0; j < 3; j++) {
+						if (boardHere[i][j] != null) {
+							count = count + 1;
+							if (count == 9) {
+								winner = "empate";
+								document.querySelector(".sub-text").innerHTML =
+									"" + winner;
+							}
+						}
+					}
 				}
 			}
 		}
