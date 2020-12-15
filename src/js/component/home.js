@@ -103,19 +103,20 @@ export function Home() {
 
 	const [turn, setTurn] = useState(null);
 
-	useEffect(() => {
-		if (turn == null && status != "playing") {
-			setTurn("x");
-		} else {
-			if (turn == "x" && status != "playing") {
-				setTurn("o");
+	useEffect(
+		() => {
+			if (turn == null) {
+				setTurn("x");
 			} else {
-				if (turn == "o" && status != "playing") {
+				if (turn == "x") {
+					setTurn("o");
+				} else {
 					setTurn("x");
 				}
 			}
-		}
-	});
+		},
+		[board]
+	);
 
 	//se hace esta función para saber en qué celda fue hecho el click y colocar pinta en la celda
 	const TurnGame = (indexRow, indexCol) => {
