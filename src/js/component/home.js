@@ -5,6 +5,7 @@ import "bootstrap";
 
 //Para este proyecto de To Do List with Fetch, primero hay que crear nuestro usuario en la API de BreathCode
 //API:  https://assets.breatheco.de/apis/fake/todos/
+const BASE_URL = "https://assets.breatheco.de/apis/fake/todos/";
 //Haciendo POST https://assets.breatheco.de/apis/fake/todos/user/metantonio
 //dará error porque el servidor pide tener un arreglo vacío en el body (content .JSON), agregarlo. Debe arrojar Status: 200
 
@@ -22,6 +23,32 @@ const Home = () => {
 		);
 	};
 
+	const eliminaTarea = indexItem => {
+		guardarLista(prevState =>
+			prevState.filter((todo, index) => index !== indexItem)
+		);
+	};
+
+	useEffect(() => {
+		let url = `${BASE_URL}/user/metantonio`;
+		//por defecto fetch es método GET y .json, el cuerpo del json (la respuesta) es pasada a la variable APILista y se guarda
+		// fetch(url)
+		// 	.then(response => response.json())
+		// 	.then(APILista => guardarLista(APILista))
+		// 	.catch(error => console.log(`{error}`));
+
+		//otra forma para no tener .then().then()... de forma que sea más legible
+		const getTask = async () => {
+			//esto obliga a javascript a esperar por la promesa
+			let response = await fetch(url);
+			//ahora response en un valor y no una promesa hasta no tener
+			//respuesta del servidor así que habría que esperar a tener respuesta para que response sea una promesa
+			let APILista = await response.json();
+			guardarLista(APILista);
+		};
+		getTask(url);
+	}, []);
+
 	return (
 		<>
 			<div className="container-fluid col-8">
@@ -31,15 +58,28 @@ const Home = () => {
 					<input
 						placeholder="escribir nueva tarea"
 						value={tarea}
-						onKeyDown={e => {
+						onKeyDown={async e => {
 							if (e.keyCode == "13") {
 								let mostrarLista = [];
 								for (let i = 0; i < lista.length; i++) {
 									mostrarLista.push(lista[i]);
 								}
-								mostrarLista.push(tarea);
-								guardarLista(mostrarLista);
-								guardarTarea((e.target.value = ""));
+								mostrarLista.push({
+									label: tarea,
+									done: false
+								});
+								let response = await fetch(
+									`${BASE_URL}/user/metantonio`,
+									{
+										method: "POST",
+										body: JSON.stringify(mostrarLista),
+										headers: {
+											"Content-Type": "application/json"
+										}
+									}
+								);
+								// guardarLista(mostrarLista);
+								//guardarTarea((e.target.value = ""));
 							}
 						}}
 						onChange={e => {
@@ -48,13 +88,13 @@ const Home = () => {
 						type="text"
 					/>
 					<ul className="list-group list-group-flush">
-						{lista.map((cosas, index) => {
+						{lista.map((tareas, index) => {
 							return (
 								<>
 									<li
 										key={index}
 										className="list-group-item d-flex justify-content-between">
-										{cosas}
+										{tareas.label}
 										<button
 											className="btn btn-light"
 											onClick={e => {
