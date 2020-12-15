@@ -180,11 +180,21 @@ export function Home() {
 						<h4 className="col-12">CHOOSE YOUR WEAPON</h4>
 						<div className="row">
 							<div className="d-flex flex-column align-items-center m-3">
-								<input className="form-control" />
+								<input
+									className="form-control"
+									id="player-one"
+									placeholder="Player One's Name"
+									value={players.name}
+								/>
 								<i>{"⭕"}</i>
 							</div>
 							<div className="d-flex flex-column align-items-center m-3">
-								<input className="form-control" />
+								<input
+									className="form-control"
+									id="player-two"
+									placeholder="Player Two's Name"
+									value={players.name}
+								/>
 								<i>{"✖"}</i>
 							</div>
 						</div>
