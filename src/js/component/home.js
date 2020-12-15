@@ -58,6 +58,7 @@ export function Home() {
 			if (row[0] && row[0] == row[1] && row[1] == row[2]) {
 				winner = row[0];
 				alert("victoria por filas iguales, símbolo ganador: " + winner);
+				newGame(board);
 				break;
 			}
 			//se intenta tener ahora la misma estructura de matriz que las coordenadas
@@ -76,6 +77,7 @@ export function Home() {
 						"victoria por columnas iguales, símbolo ganador: " +
 							winner
 					);
+					newGame(board);
 					break;
 				}
 			}
@@ -92,6 +94,7 @@ export function Home() {
 				) {
 					winner = boardHere[1][1];
 					alert("victoria por diagonal, símbolo ganador: " + winner);
+					newGame(board);
 				}
 			}
 		}
@@ -101,13 +104,13 @@ export function Home() {
 	const [turn, setTurn] = useState(null);
 
 	useEffect(() => {
-		if (turn == null) {
+		if (turn == null && status != "playing") {
 			setTurn("x");
 		} else {
-			if (turn == "x") {
+			if (turn == "x" && status != "playing") {
 				setTurn("o");
 			} else {
-				if (turn == "o") {
+				if (turn == "o" && status != "playing") {
 					setTurn("x");
 				}
 			}
@@ -124,6 +127,7 @@ export function Home() {
 			});
 		});
 		setBoard(newboard);
+		console.log("ejecutado cambiar turno");
 	};
 
 	const newGame = boardOfNewGame => {
@@ -167,6 +171,7 @@ export function Home() {
 										return (
 											<div
 												onClick={e => {
+													//evaluarPartida(board);
 													TurnGame(
 														indexRow,
 														indexCol
@@ -209,16 +214,6 @@ export function Home() {
 								...statusPlay,
 								status: "init"
 							});
-							newGame(board);
-							/*{
-								setBoard({
-									board: [
-										[null, null, null],
-										[null, null, null],
-										[null, null, null]
-									]
-								});
-							}*/
 						}
 					}}>
 					{statusPlay.status == "init" ? "Iniciar" : "Volver"}
