@@ -57,7 +57,9 @@ export function Home() {
 		for (let row of boardHere) {
 			if (row[0] && row[0] == row[1] && row[1] == row[2]) {
 				winner = row[0];
-				alert("victoria por filas iguales, símbolo ganador: " + winner);
+				//alert("victoria por filas iguales, símbolo ganador: " + winner);
+				document.querySelector(".sub-text").innerHTML =
+					"victoria por filas iguales, símbolo ganador: " + winner;
 				newGame(board);
 				break;
 			}
@@ -73,10 +75,10 @@ export function Home() {
 			for (let col of columns) {
 				if (col[0] && col[0] == col[1] && col[1] == col[2]) {
 					winner = col[0];
-					alert(
+					//alert("victoria por columnas iguales, símbolo ganador: " + winner);
+					document.querySelector(".sub-text").innerHTML =
 						"victoria por columnas iguales, símbolo ganador: " +
-							winner
-					);
+						winner;
 					newGame(board);
 					break;
 				}
@@ -93,7 +95,9 @@ export function Home() {
 						boardHere[1][1] == boardHere[0][2])
 				) {
 					winner = boardHere[1][1];
-					alert("victoria por diagonal, símbolo ganador: " + winner);
+					//alert("victoria por diagonal, símbolo ganador: " + winner);
+					document.querySelector(".sub-text").innerHTML =
+						"victoria por diagonal, símbolo ganador: " + winner;
 					newGame(board);
 				}
 			}
@@ -114,8 +118,9 @@ export function Home() {
 					setTurn("x");
 				}
 			}
+			evaluarPartida(board);
 		},
-		[board]
+		[board] //mientras no se actualice el board, no ocurre el useEffect
 	);
 
 	//se hace esta función para saber en qué celda fue hecho el click y colocar pinta en la celda
@@ -147,7 +152,7 @@ export function Home() {
 			<div className="text-center row">
 				<div className="container col-10 text-white">
 					<h1>Tic Tac Toe in React</h1>
-					<h3>Pick a Weapon</h3>
+					<h3 className="sub-text">Pick a Weapon</h3>
 				</div>
 			</div>
 			<div className="row d-flex justify-content-center">
@@ -179,7 +184,7 @@ export function Home() {
 														indexRow,
 														indexCol
 													);
-													evaluarPartida(board);
+													//evaluarPartida(board);
 												}}
 												key={`${indexRow}-${indexCol}`}
 												className="cell d-flex justify-content-center align-items-center">
