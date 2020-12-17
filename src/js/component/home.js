@@ -230,11 +230,36 @@ const Home = () => {
 							);
 						})}
 					</ul>
-					<p className="card-footer text-muted">
+					<p className="card-footer text-muted" id="message">
 						{lista.length > 0
 							? `${lista.length} tareas por completar`
 							: "Sin tareas por hacer: Usuario Borrado. Recarga la página para crearlo"}
 					</p>
+					<button
+						onClick={async e => {
+							guardarLista([]);
+							let response = await fetch(
+								`${BASE_URL}/user/metantonio`,
+								{
+									method: "DELETE",
+									body: JSON.stringify(lista),
+									headers: {
+										"Content-Type": "application/json"
+									}
+								}
+							);
+							if (response.ok) {
+								guardarLista();
+								guardarTarea((e.target.value = ""));
+								alert(
+									"Tareas eliminadas y usuario eliminado. Recargue la página"
+								);
+							} else {
+								console.log("error cargando");
+							}
+						}}>
+						Eliminar Lista (y usuario)
+					</button>
 				</div>
 			</div>
 		</>
